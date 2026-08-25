@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contelt | Construcción de Torres de Telecomunicación</title>
+    <!-- Fuente moderna Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variables de Color (Gama de Azules y Blancos) */
+        :root {
+            --primary: #003366;       /* Azul Marino */
+            --secondary: #0066cc;     /* Azul Rey */
+            --accent: #3399ff;        /* Azul Claro */
+            --bg-light: #f4f8fb;      /* Blanco / Gris Claro */
+            --text-dark: #1f2d3d;
+            --text-light: #ffffff;
+        }
+
+        /* Estilos Generales */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Navegación */
+        header {
+            background-color: #ffffff;
+            border-bottom: 2px solid #e1e8ed;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text-light);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--text-light);
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+            color: var(--text-light);
+        }
+
+        /* Secciones */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+            display: block;
+            margin: 0.5rem auto 0;
+        }
+
+        /* Grid de Servicios */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-light);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 51, 102, 0.1);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Sobre Nosotros (Fondo Alternativo) */
+        .about-section {
+            background-color: var(--bg-light);
+        }
+
+        /* Formulario de Contacto */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .btn-submit {
+            background-color: var(--secondary);
+            color: var(--text-light);
+            border: none;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin: 0 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado / Menú -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">Con<span>telt</span></a>
+            <nav>
+                <a href="#inicio">Inicio</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección Principal (Hero) -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Infraestructura Robusta para Conectar al Paìs</h1>
+            <p>Especialistas en el diseño, ingeniería y construcción de torres de telecomunicación de alta resistencia.</p>
+            <a href="#contacto" class="btn">Solicitar Cotización</a>
+        </div>
+    </section>
+
+    <!-- Sección Sobre Nosotros -->
+    <div class="about-section">
+        <section id="nosotros" class="section">
+            <h2 class="section-title">Sobre Contelt</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 1.5rem;">
+                En <strong>Contelt</strong> nos dedicamos al desarrollo integral de infraestructura para telecomunicaciones. Con años de experiencia en la industria, garantizamos estándares superiores de seguridad, durabilidad e innovación tecnológica en cada torre construida.
+            </p>
+        </section>
+    </div>
+
+    <!-- Sección Servicios -->
+    <section id="servicios" class="section">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="card">
+                <h3>Fabricación y Montaje</h3>
+                <p>Diseño y construcción de torres autosoportadas, arriostradas y monopolos ajustados a los requerimientos del terreno.</p>
+            </div>
+            <div class="card">
+                <h3>Mantenimiento Estructural</h3>
+                <p>Inspección técnica, refuerzo y mantenimiento preventivo o correctivo para prolongar la vida útil de las estructuras.</p>
+            </div>
+            <div class="card">
+                <h3>Obras Civiles e Instalación</h3>
+                <p>Cimentación especializada, adecuación del sitio de trabajo e integración de infraestructura complementaria.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="section">
+        <h2 class="section-title">Contáctanos</h2>
+        <form class="contact-form" action="#" method="post" onsubmit="event.preventDefault(); alert('Mensaje enviado con éxito.');">
+            <div class="form-group">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan Pérez">
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required placeholder="correo@empresa.com">
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje o Requerimiento</label>
+                <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Describe las características de tu proyecto..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Enviar Mensaje</button>
+        </form>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer>
+        <p>&copy; 2026 Contelt. Todos los derechos reservados. Infraestructura en Telecomunicaciones.</p>
+    </footer>
+
+</body>
+</html>
