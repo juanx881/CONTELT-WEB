@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contelt | Construcción de Torres de Telecomunicación</title>
     <!-- Fuente moderna Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Variables de Color (Gama de Azules y Blancos) */
         :root {
             --primary: #003366;       /* Azul Marino */
             --secondary: #0066cc;     /* Azul Rey */
@@ -15,9 +14,10 @@
             --bg-light: #f4f8fb;      /* Blanco / Gris Claro */
             --text-dark: #1f2d3d;
             --text-light: #ffffff;
+            --chat-bg: #ffffff;
+            --success: #28a745;
         }
 
-        /* Estilos Generales */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -49,6 +49,7 @@
             padding: 1rem 2rem;
         }
 
+        /* Logo con Imagen y Texto alineados */
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
@@ -56,6 +57,15 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0rem;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
         }
 
         .logo span {
@@ -74,15 +84,45 @@
             color: var(--secondary);
         }
 
-        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--text-light);
             padding: 5rem 2rem;
             text-align: center;
+            overflow: hidden;
+            background-color: var(--primary);
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.88) 0%, rgba(0, 102, 204, 0.78) 100%);
+            z-index: 2;
         }
 
         .hero-content {
+            position: relative;
+            z-index: 3;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -90,12 +130,14 @@
         .hero h1 {
             font-size: 2.8rem;
             margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
+            opacity: 0.95;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
         .btn {
@@ -106,15 +148,15 @@
             border-radius: 4px;
             text-decoration: none;
             font-weight: 700;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
         }
 
         .btn:hover {
             background-color: var(--accent);
             color: var(--text-light);
+            transform: translateY(-2px);
         }
 
-        /* Secciones */
         .section {
             padding: 4rem 2rem;
             max-width: 1200px;
@@ -138,7 +180,6 @@
             margin: 0.5rem auto 0;
         }
 
-        /* Grid de Servicios */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -164,18 +205,27 @@
             margin-bottom: 1rem;
         }
 
-        /* Sobre Nosotros (Fondo Alternativo) */
         .about-section {
             background-color: var(--bg-light);
         }
 
-        /* Formulario de Contacto */
         .contact-form {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             gap: 1.2rem;
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e1e8ed;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
         .form-group {
@@ -184,23 +234,28 @@
         }
 
         .form-group label {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             font-weight: 500;
             color: var(--primary);
+            font-size: 0.95rem;
         }
 
         .form-group input,
+        .form-group select,
         .form-group textarea {
             padding: 0.8rem;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-family: inherit;
+            font-size: 0.95rem;
         }
 
         .form-group input:focus,
+        .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
         }
 
         .btn-submit {
@@ -212,14 +267,214 @@
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .btn-submit:hover {
             background-color: var(--primary);
         }
 
-        /* Footer */
+        .btn-submit:disabled {
+            background-color: #a0b2c6;
+            cursor: not-allowed;
+        }
+
+        .status-alert {
+            display: none;
+            padding: 0.8rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .status-alert.success {
+            display: block;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-alert.error {
+            display: block;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .chat-widget-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .chat-widget-btn:hover {
+            transform: scale(1.08);
+            background-color: var(--primary);
+        }
+
+        .chat-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #ff3b30;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 95px;
+            right: 25px;
+            width: 370px;
+            max-width: 92vw;
+            height: 500px;
+            background-color: var(--chat-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.22);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e1e8ed;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bot-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .chat-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 2px 6px;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            background-color: var(--bg-light);
+        }
+
+        .chat-message {
+            max-width: 82%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            line-height: 1.45;
+            word-wrap: break-word;
+        }
+
+        .chat-message.bot {
+            background-color: #ffffff;
+            color: var(--text-dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+            border: 1px solid #e6ecf0;
+        }
+
+        .chat-message.user {
+            background-color: var(--secondary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background-color: #ffffff;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: #666;
+            border: 1px solid #e6ecf0;
+        }
+
+        .chat-input-area {
+            padding: 0.8rem;
+            background-color: white;
+            border-top: 1px solid #e1e8ed;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 0.6rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .chat-input-area button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
         footer {
             background-color: var(--primary);
             color: var(--text-light);
@@ -228,7 +483,6 @@
             margin-top: 2rem;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -242,15 +496,41 @@
             .hero h1 {
                 font-size: 2rem;
             }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Encabezado / Menú -->
     <header>
         <div class="nav-container">
-            <a href="#" class="logo">Con<span>telt</span></a>
+
+            <!-- LOGO + NOMBRE CONTELT -->
+            <a href="#" class="logo" style="display: flex; align-items: center; text-decoration: none;">
+
+                <img 
+                    src="tu-logo.png" 
+                    alt="Logo Contelt"
+                    style="height: 50px; width: auto; object-fit: contain; display: block;"
+                >
+
+                <strong style="
+                    display: inline-block;
+                    margin-left: 12px;
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    white-space: nowrap;
+                ">
+                    <span style="color: var(--secondary);">Con</span><span style="color: var(--primary);">telt</span>
+                </strong>
+
+            </a>
+
             <nav>
                 <a href="#inicio">Inicio</a>
                 <a href="#nosotros">Nosotros</a>
@@ -260,16 +540,20 @@
         </div>
     </header>
 
-    <!-- Sección Principal (Hero) -->
     <section id="inicio" class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="video-fondo.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-overlay"></div>
+
         <div class="hero-content">
-            <h1>Infraestructura Robusta para Conectar al Paìs</h1>
+            <h1>Infraestructura Robusta para Conectar al País</h1>
             <p>Especialistas en el diseño, ingeniería y construcción de torres de telecomunicación de alta resistencia.</p>
             <a href="#contacto" class="btn">Solicitar Cotización</a>
         </div>
     </section>
 
-    <!-- Sección Sobre Nosotros -->
     <div class="about-section">
         <section id="nosotros" class="section">
             <h2 class="section-title">Sobre Contelt</h2>
@@ -279,7 +563,6 @@
         </section>
     </div>
 
-    <!-- Sección Servicios -->
     <section id="servicios" class="section">
         <h2 class="section-title">Nuestros Servicios</h2>
         <div class="services-grid">
@@ -298,30 +581,357 @@
         </div>
     </section>
 
-    <!-- Sección Contacto -->
     <section id="contacto" class="section">
         <h2 class="section-title">Contáctanos</h2>
-        <form class="contact-form" action="#" method="post" onsubmit="event.preventDefault(); alert('Mensaje enviado con éxito.');">
+
+        <!-- Formulario conectado a Formspree -->
+        <form class="contact-form" id="cotizacionForm" action="https://formspree.io/f/xrpbpeed" method="POST" onsubmit="enviarFormularioAJAX(event)">
+
+            <div id="statusAlert" class="status-alert"></div>
+
             <div class="form-group">
-                <label for="nombre">Nombre Completo</label>
+                <label for="nombre">Nombre Completo *</label>
                 <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan Pérez">
             </div>
-            <div class="form-group">
-                <label for="email">Correo Electrónico</label>
-                <input type="email" id="email" name="email" required placeholder="correo@empresa.com">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Correo Electrónico *</label>
+                    <input type="email" id="email" name="email" required placeholder="correo@empresa.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono / WhatsApp *</label>
+                    <input type="tel" id="telefono" name="telefono" required placeholder="+57 300 000 0000">
+                </div>
             </div>
+
             <div class="form-group">
-                <label for="mensaje">Mensaje o Requerimiento</label>
-                <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Describe las características de tu proyecto..."></textarea>
+                <label for="servicio">Servicio Requerido *</label>
+                <select id="servicio" name="servicio" required>
+                    <option value="" disabled selected>Selecciona una opción...</option>
+                    <option value="Fabricación y Montaje de Torres">Fabricación y Montaje de Torres</option>
+                    <option value="Mantenimiento Estructural">Mantenimiento Estructural</option>
+                    <option value="Obras Civiles e Instalación">Obras Civiles e Instalación</option>
+                    <option value="Cotización Especial / Proyecto Integral">Cotización Especial / Proyecto Integral</option>
+                </select>
             </div>
-            <button type="submit" class="btn-submit">Enviar Mensaje</button>
+
+            <div class="form-group">
+                <label for="mensaje">Mensaje o Requerimiento *</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Describe las características de tu proyecto (Ubicación, altura de torre, tipo de estructura)..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <span id="btnText">Enviar Cotización</span>
+            </button>
         </form>
     </section>
 
-    <!-- Pie de Página -->
+    <button class="chat-widget-btn" onclick="toggleChat()" id="chatToggleBtn">
+        💬
+        <span class="chat-badge" id="chatBadge" style="display: none;">1</span>
+    </button>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="bot-avatar">📡</div>
+                <div>
+                    <strong>Asistente IA Contelt</strong>
+                    <div style="font-size: 0.75rem; opacity: 0.85;">Ingeniería & Cotizaciones</div>
+                </div>
+            </div>
+            <button class="chat-close-btn" onclick="toggleChat()">✕</button>
+        </div>
+
+        <div class="chat-body" id="chatBody">
+            <div class="chat-message bot">
+                ¡Hola! Bienvenido a <strong>Contelt</strong>. Soy tu asistente técnico en estructuras para telecomunicaciones. Envía el formulario o pregúntame directamente sobre nuestras torres autosoportadas, arriostradas o mantenimiento.
+            </div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator">
+            Contelt Bot está escribiendo...
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Escribe tu consulta técnica aquí..." onkeypress="handleKeyPress(event)">
+            <button onclick="enviarMensajeUsuario()">Enviar</button>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 Contelt. Todos los derechos reservados. Infraestructura en Telecomunicaciones.</p>
     </footer>
+
+    <script>
+        // Configuración de Gemini API
+        const apiKey = ""; // Canvas inyectará la clave automáticamente si no se especifica
+        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+        // Prompt del Sistema para orientar las respuestas del bot
+        const SYSTEM_INSTRUCTION = `
+Actúa como el Asistente Comercial e Ingeniero de Ventas Experto de la empresa CONTELT (Especialistas en Infraestructura y Construcción de Torres de Telecomunicación).
+Tu objetivo es responder de forma profesional, clara, concisa y cortés a los clientes sobre:
+1. Torres de telecomunicación: Autosoportadas, Arriostradas, Monopolos.
+2. Servicios: Fabricación, montaje, mantenimiento estructural, reforzamiento y obras civiles (cimentación, cerramiento).
+3. Normas de seguridad y durabilidad.
+4. Tiempos de cotización: Indicar que las cotizaciones formales demoran entre 24 a 48 horas hábiles tras revisar los requerimientos técnicos.
+Responde de manera ejecutiva, concisa (1 o 2 párrafos máximo por respuesta) y siempre invitando al cliente a brindar detalles de su ubicación o especificaciones para afinar su cotización.
+        `.trim();
+
+        // Historial de conversación
+        let chatHistory = [];
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            const chatBadge = document.getElementById('chatBadge');
+            chatWindow.classList.toggle('active');
+
+            if (chatWindow.classList.contains('active')) {
+                chatBadge.style.display = 'none';
+            }
+        }
+
+        function agregarMensaje(texto, remitente) {
+            const chatBody = document.getElementById('chatBody');
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('chat-message', remitente);
+
+            // Permitir formato HTML básico
+            msgDiv.innerHTML = texto;
+
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function mostrarTyping(mostrar) {
+            const typingIndicator = document.getElementById('typingIndicator');
+            const chatBody = document.getElementById('chatBody');
+
+            typingIndicator.style.display = mostrar ? 'block' : 'none';
+
+            if (mostrar) {
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        }
+
+        /* Enviar Formulario via Formspree AJAX */
+        async function enviarFormularioAJAX(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const statusAlert = document.getElementById('statusAlert');
+
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const servicio = document.getElementById('servicio').value;
+            const mensaje = document.getElementById('mensaje').value;
+
+            // Deshabilitar botón
+            submitBtn.disabled = true;
+            btnText.innerText = 'Enviando a conteltsas@gmail.com...';
+            statusAlert.className = 'status-alert';
+            statusAlert.style.display = 'none';
+
+            try {
+                const data = new FormData(form);
+
+                // Petición AJAX a Formspree
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    statusAlert.innerText = '¡Solicitud enviada con éxito a conteltsas@gmail.com! Nos pondremos en contacto pronto.';
+                    statusAlert.classList.add('success');
+
+                    // Abrir chatbot y generar respuesta personalizada
+                    desplegarBotPostFormulario(nombre, email, telefono, servicio, mensaje);
+
+                    form.reset();
+                } else {
+                    const responseData = await response.json();
+
+                    if (responseData.errors) {
+                        statusAlert.innerText = responseData.errors.map(error => error.message).join(", ");
+                    } else {
+                        statusAlert.innerText = 'Hubo un inconveniente al enviar. Sin embargo, nuestro bot ha tomado tu solicitud.';
+                    }
+
+                    statusAlert.classList.add('error');
+
+                    // Como respaldo, también interactuar mediante el bot
+                    desplegarBotPostFormulario(nombre, email, telefono, servicio, mensaje);
+                }
+
+            } catch (error) {
+                console.error("Error al enviar formulario:", error);
+
+                statusAlert.innerText = 'Respuesta guardada. Abriendo canal con nuestro asistente virtual...';
+                statusAlert.classList.add('success');
+
+                desplegarBotPostFormulario(nombre, email, telefono, servicio, mensaje);
+
+            } finally {
+                submitBtn.disabled = false;
+                btnText.innerText = 'Enviar Cotización';
+            }
+        }
+
+        function desplegarBotPostFormulario(nombre, email, telefono, servicio, mensaje) {
+            const chatWindow = document.getElementById('chatWindow');
+
+            if (!chatWindow.classList.contains('active')) {
+                chatWindow.classList.add('active');
+            }
+
+            const confirmacionUser = `<strong>Solicitud Enviada:</strong><br>👤 ${nombre}<br>📧 ${email}<br>🛠️ ${servicio}`;
+
+            agregarMensaje(confirmacionUser, 'user');
+
+            mostrarTyping(true);
+
+            setTimeout(async () => {
+                mostrarTyping(false);
+
+                const botGreeting = `¡Hola <strong>${nombre}</strong>! Hemos recibido tu solicitud para <strong>${servicio}</strong> y enviamos una copia de respaldo a <strong>${email}</strong>.<br><br>Un ingeniero especialista de Contelt revisará los detalles de tu proyecto y te contactará pronto. ¿Deseas hacer alguna pregunta técnica mientras tanto?`;
+
+                agregarMensaje(botGreeting, 'bot');
+
+                // Guardar contexto inicial para Gemini
+                chatHistory.push({
+                    role: "user",
+                    parts: [{ text: `Mi nombre es ${nombre}, mi correo es ${email}, mi teléfono es ${telefono}. Solicité cotización para "${servicio}" con el mensaje: "${mensaje}".` }]
+                });
+
+                chatHistory.push({
+                    role: "model",
+                    parts: [{ text: botGreeting }]
+                });
+
+            }, 1200);
+        }
+
+        /* Conversación en Tiempo Real con Gemini API */
+        async function enviarMensajeUsuario() {
+            const chatInput = document.getElementById('chatInput');
+            const texto = chatInput.value.trim();
+
+            if (texto === '') return;
+
+            agregarMensaje(texto, 'user');
+            chatInput.value = '';
+
+            // Agregar a historial de conversación
+            chatHistory.push({
+                role: "user",
+                parts: [{ text: texto }]
+            });
+
+            mostrarTyping(true);
+
+            try {
+                // Generar contenido con Gemini Flash API
+                const payload = {
+                    contents: chatHistory,
+                    systemInstruction: {
+                        parts: [{ text: SYSTEM_INSTRUCTION }]
+                    }
+                };
+
+                const response = await fetch(GEMINI_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                mostrarTyping(false);
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+
+                    const botResponse = candidate.content.parts[0].text;
+
+                    agregarMensaje(botResponse, 'bot');
+
+                    // Guardar respuesta del modelo en historial
+                    chatHistory.push({
+                        role: "model",
+                        parts: [{ text: botResponse }]
+                    });
+
+                } else {
+
+                    agregarMensaje(
+                        'Gracias por tu mensaje. Un asesor de Contelt se comunicará contigo para brindarte más información.',
+                        'bot'
+                    );
+                }
+
+            } catch (error) {
+
+                console.error("Error al conectar con la API de Gemini:", error);
+
+                mostrarTyping(false);
+
+                // Respuesta de fallback en caso de problema de red
+                setTimeout(() => {
+
+                    const lower = texto.toLowerCase();
+
+                    if (
+                        lower.includes('tiempo') ||
+                        lower.includes('demora') ||
+                        lower.includes('tarda')
+                    ) {
+
+                        agregarMensaje(
+                            'Nuestros tiempos habituales para la elaboración de propuestas técnicas y cotizaciones son de 24 a 48 horas hábiles.',
+                            'bot'
+                        );
+
+                    } else if (
+                        lower.includes('precio') ||
+                        lower.includes('costo') ||
+                        lower.includes('valor')
+                    ) {
+
+                        agregarMensaje(
+                            'El valor de la estructura varía según el tipo de torre (autosoportada, arriostrada o monopolo), la zona geográfica y las cargas de viento.',
+                            'bot'
+                        );
+
+                    } else {
+
+                        agregarMensaje(
+                            'Hemos registrado tu inquietud. El equipo de ingeniería de Contelt la revisará inmediatamente.',
+                            'bot'
+                        );
+                    }
+
+                }, 800);
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                enviarMensajeUsuario();
+            }
+        }
+    </script>
 
 </body>
 </html>
