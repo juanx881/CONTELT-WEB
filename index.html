@@ -49,7 +49,6 @@
             padding: 1rem 2rem;
         }
 
-        /* Logo con Imagen y Texto alineados */
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
@@ -66,10 +65,6 @@
             height: 50px;
             width: auto;
             object-fit: contain;
-        }
-
-        .logo span {
-            color: var(--secondary);
         }
 
         nav a {
@@ -116,7 +111,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 51, 102, 0.4) 0%, rgba(0, 102, 204, 0.3) 100%);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.3) 0%, rgba(0, 102, 204, 0.3) 100%);
             z-index: 2;
         }
 
@@ -507,28 +502,11 @@
 
     <header>
         <div class="nav-container">
-
-            <!-- LOGO + NOMBRE CONTELT -->
             <a href="#" class="logo" style="display: flex; align-items: center; text-decoration: none;">
-
-                <img 
-                    src="tu-logo.png" 
-                    alt="Logo Contelt"
-                    style="height: 50px; width: auto; object-fit: contain; display: block;"
-                >
-
-                <strong style="
-                    display: inline-block;
-                    margin-left: 12px;
-                    font-size: 1.8rem;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                    white-space: nowrap;
-                ">
+                <img src="tu-logo.png" alt="Logo Contelt" style="height: 50px; width: auto; object-fit: contain; display: block;">
+                <strong style="display: inline-block; margin-left: 12px; font-size: 1.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;">
                     <span style="color: var(--secondary);">Con</span><span style="color: var(--primary);">telt</span>
                 </strong>
-
             </a>
 
             <nav>
@@ -584,9 +562,7 @@
     <section id="contacto" class="section">
         <h2 class="section-title">Contáctanos</h2>
 
-        <!-- Formulario conectado a Formspree -->
         <form class="contact-form" id="cotizacionForm" action="https://formspree.io/f/xrpbpeed" method="POST" onsubmit="enviarFormularioAJAX(event)">
-
             <div id="statusAlert" class="status-alert"></div>
 
             <div class="form-group">
@@ -636,9 +612,9 @@
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <div class="chat-header-info">
-                <div class="bot-avatar">📡</div>
+                <div class="bot-avatar">🏗️</div>
                 <div>
-                    <strong>Asistente IA Contelt</strong>
+                    <strong>Asistente Virtual Contelt</strong>
                     <div style="font-size: 0.75rem; opacity: 0.85;">Ingeniería & Cotizaciones</div>
                 </div>
             </div>
@@ -647,7 +623,7 @@
 
         <div class="chat-body" id="chatBody">
             <div class="chat-message bot">
-                ¡Hola! Bienvenido a <strong>Contelt</strong>. Soy tu asistente técnico en estructuras para telecomunicaciones. Envía el formulario o pregúntame directamente sobre nuestras torres autosoportadas, arriostradas o mantenimiento.
+                ¡Hola! Bienvenido a <strong>Contelt</strong>. Soy tu asistente técnico en torres de telecomunicaciones.<br><br>¿En qué puedo ayudarte? Puedes preguntarme sobre:<br>• Tipos de torres (autosoportadas, monopolos)<br>• Tiempos de entrega y cotización<br>• Precios o costos<br>• Mantenimiento y obras civiles
             </div>
         </div>
 
@@ -656,7 +632,7 @@
         </div>
 
         <div class="chat-input-area">
-            <input type="text" id="chatInput" placeholder="Escribe tu consulta técnica aquí..." onkeypress="handleKeyPress(event)">
+            <input type="text" id="chatInput" placeholder="Escribe tu pregunta aquí..." onkeypress="handleKeyPress(event)">
             <button onclick="enviarMensajeUsuario()">Enviar</button>
         </div>
     </div>
@@ -666,32 +642,6 @@
     </footer>
 
     <script>
-        // Configuración de Gemini API
-        const apiKey = ""; // Canvas inyectará la clave automáticamente si no se especifica
-        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-
-        // Prompt del Sistema para orientar las respuestas del bot
-        const SYSTEM_INSTRUCTION = `
-        Actúa como el Asistente Comercial e Ingeniero de Ventas Experto de la empresa CONTELT (Especialistas en Infraestructura y Construcción de Torres de Telecomunicación).
-        Tu objetivo es responder de forma profesional, clara, concisa y cortés a los clientes sobre:
-        1. Torres de telecomunicación: Autosoportadas, Arriostradas, Monopolos.
-        2. Servicios: Fabricación, montaje, mantenimiento estructural, reforzamiento y obras civiles (cimentación, cerramiento).
-        3. Normas de seguridad y durabilidad.
-        4. Tiempos de cotización: Indicar que las cotizaciones formales demoran entre 24 a 48 horas hábiles tras revisar los requerimientos técnicos.
-
-        Preguntas frecuentes y respuestas:
-        - Pregunta: ¿Qué tipos de torres de telecomunicación construye Contelt?
-        Respuesta: En Contelt construimos torres autosoportadas, arriostradas y monopolos, seleccionando la solución de acuerdo con las características del terreno, la altura requerida y las necesidades del proyecto.
-
-        - Pregunta: ¿Qué información necesito para solicitar una cotización?
-        Respuesta: Para realizar una cotización necesitamos información como la ubicación del proyecto, altura aproximada de la torre, tipo de estructura requerida y características generales del terreno. Con estos datos nuestro equipo puede revisar los requerimientos y preparar una propuesta.
-
-        Responde de manera ejecutiva, concisa (1 o 2 párrafos máximo por respuesta) y siempre invitando al cliente a brindar detalles de su ubicación o especificaciones para afinar su cotización.
-        `.trim();
-
-        // Historial de conversación
-        let chatHistory = [];
-
         function toggleChat() {
             const chatWindow = document.getElementById('chatWindow');
             const chatBadge = document.getElementById('chatBadge');
@@ -707,7 +657,6 @@
             const msgDiv = document.createElement('div');
             msgDiv.classList.add('chat-message', remitente);
 
-            // Permitir formato HTML básico
             msgDiv.innerHTML = texto;
 
             chatBody.appendChild(msgDiv);
@@ -740,16 +689,14 @@
             const servicio = document.getElementById('servicio').value;
             const mensaje = document.getElementById('mensaje').value;
 
-            // Deshabilitar botón
             submitBtn.disabled = true;
-            btnText.innerText = 'Enviando a conteltsas@gmail.com...';
+            btnText.innerText = 'Enviando...';
             statusAlert.className = 'status-alert';
             statusAlert.style.display = 'none';
 
             try {
                 const data = new FormData(form);
 
-                // Petición AJAX a Formspree
                 const response = await fetch(form.action, {
                     method: 'POST',
                     body: data,
@@ -759,35 +706,23 @@
                 });
 
                 if (response.ok) {
-                    statusAlert.innerText = '¡Solicitud enviada con éxito a conteltsas@gmail.com! Nos pondremos en contacto pronto.';
+                    statusAlert.innerText = '¡Solicitud enviada con éxito! Nos pondremos en contacto pronto.';
                     statusAlert.classList.add('success');
 
-                    // Abrir chatbot y generar respuesta personalizada
-                    desplegarBotPostFormulario(nombre, email, telefono, servicio, mensaje);
-
+                    desplegarBotPostFormulario(nombre, email, servicio);
                     form.reset();
                 } else {
-                    const responseData = await response.json();
+                    statusAlert.innerText = 'Hemos registrado tu solicitud. Abriendo chat de soporte...';
+                    statusAlert.classList.add('success');
 
-                    if (responseData.errors) {
-                        statusAlert.innerText = responseData.errors.map(error => error.message).join(", ");
-                    } else {
-                        statusAlert.innerText = 'Hubo un inconveniente al enviar. Sin embargo, nuestro bot ha tomado tu solicitud.';
-                    }
-
-                    statusAlert.classList.add('error');
-
-                    // Como respaldo, también interactuar mediante el bot
-                    desplegarBotPostFormulario(nombre, email, telefono, servicio, mensaje);
+                    desplegarBotPostFormulario(nombre, email, servicio);
                 }
 
             } catch (error) {
-                console.error("Error al enviar formulario:", error);
-
-                statusAlert.innerText = 'Respuesta guardada. Abriendo canal con nuestro asistente virtual...';
+                statusAlert.innerText = 'Respuesta guardada. Abriendo canal con nuestro asistente...';
                 statusAlert.classList.add('success');
 
-                desplegarBotPostFormulario(nombre, email, telefono, servicio, mensaje);
+                desplegarBotPostFormulario(nombre, email, servicio);
 
             } finally {
                 submitBtn.disabled = false;
@@ -795,42 +730,69 @@
             }
         }
 
-        function desplegarBotPostFormulario(nombre, email, telefono, servicio, mensaje) {
+        function desplegarBotPostFormulario(nombre, email, servicio) {
             const chatWindow = document.getElementById('chatWindow');
 
             if (!chatWindow.classList.contains('active')) {
                 chatWindow.classList.add('active');
             }
 
-            const confirmacionUser = `<strong>Solicitud Enviada:</strong><br>👤 ${nombre}<br>📧 ${email}<br>🛠️ ${servicio}`;
-
+            const confirmacionUser = `<strong>Solicitud Enviada:</strong><br> ${nombre}<br> ${email}<br> ${servicio}`;
             agregarMensaje(confirmacionUser, 'user');
 
             mostrarTyping(true);
 
-            setTimeout(async () => {
+            setTimeout(() => {
                 mostrarTyping(false);
-
-                const botGreeting = `¡Hola <strong>${nombre}</strong>! Hemos recibido tu solicitud para <strong>${servicio}</strong> y enviamos una copia de respaldo a <strong>${email}</strong>.<br><br>Un ingeniero especialista de Contelt revisará los detalles de tu proyecto y te contactará pronto. ¿Deseas hacer alguna pregunta técnica mientras tanto?`;
-
+                const botGreeting = `¡Hola <strong>${nombre}</strong>! Hemos registrado tu solicitud para <strong>${servicio}</strong>.<br><br>Un especialista de Contelt revisará tus requerimientos y te enviará la propuesta detallada. ¿Tienes alguna pregunta técnica sobre el tipo de estructura mientras tanto?`;
                 agregarMensaje(botGreeting, 'bot');
-
-                // Guardar contexto inicial para Gemini
-                chatHistory.push({
-                    role: "user",
-                    parts: [{ text: `Mi nombre es ${nombre}, mi correo es ${email}, mi teléfono es ${telefono}. Solicité cotización para "${servicio}" con el mensaje: "${mensaje}".` }]
-                });
-
-                chatHistory.push({
-                    role: "model",
-                    parts: [{ text: botGreeting }]
-                });
-
-            }, 1200);
+            }, 1000);
         }
 
-        /* Conversación en Tiempo Real con Gemini API */
-        async function enviarMensajeUsuario() {
+        /* MOTOR DE RESPUESTAS LOCALES POR PALABRAS CLAVE (OPCIÓN B) */
+        function obtenerRespuestaLocal(texto) {
+            const t = texto.toLowerCase();
+
+            // 1. Precios / Costos
+            if (t.includes('precio') || t.includes('costo') || t.includes('cuanto cuesta') || t.includes('valor') || t.includes('presupuesto')) {
+                return 'El costo de una torre depende del tipo (autosoportada, arriostrada o monopolo), la altura solicitada, las cargas de viento y la ubicación. Completa el formulario de contacto para darte una cotización precisa.';
+            }
+
+            // 2. Tiempos / Demora
+            if (t.includes('tiempo') || t.includes('demora') || t.includes('tarda') || t.includes('plazo') || t.includes('cuanto se demora')) {
+                return 'Las cotizaciones formales se entregan en **24 a 48 horas hábiles**. Los tiempos de fabricación e instalación varían según las especificaciones técnicas del proyecto.';
+            }
+
+            // 3. Tipos de Torres
+            if (t.includes('autosoportada') || t.includes('arriostrada') || t.includes('monopolo') || t.includes('tipo') || t.includes('estructura')) {
+                return 'Ofrecemos tres tipos principales de torres:<br>• <strong>Autosoportadas:</strong> Ideales para grandes alturas y cargas pesadas.<br>• <strong>Arriostradas:</strong> Economizan espacio en piso con guayas de soporte.<br>• <strong>Monopolos:</strong> Diseño estético e ideal para zonas urbanas reducidas.';
+            }
+
+            // 4. Mantenimiento / Reparación
+            if (t.includes('mantenimiento') || t.includes('revision') || t.includes('reparar') || t.includes('refuerzo') || t.includes('inspeccion')) {
+                return 'Realizamos mantenimiento preventivo y correctivo: inspección visual y ultrasónica de soldaduras, verticalidad, cambio de tornillería, pintura anticorrosiva y refuerzo de perfiles.';
+            }
+
+            // 5. Obras Civiles / Cimentación
+            if (t.includes('obra') || t.includes('cimentacion') || t.includes('suelo') || t.includes('terreno') || t.includes('instalacion')) {
+                return 'Nuestras obras civiles incluyen estudio de suelos, cimentación en concreto armado, cerramiento perimétrico de seguridad y adecuación de vías de acceso al sitio.';
+            }
+
+            // 6. Contacto / Teléfono / Ubicación
+            if (t.includes('telefono') || t.includes('celular') || t.includes('whatsapp') || t.includes('contacto') || t.includes('donde estan') || t.includes('ubicacion')) {
+                return 'Puedes dejarnos tu información en el formulario de contacto de la página o indicarnos tu número por aquí para que un ingeniero te llame directamente.';
+            }
+
+            // 7. Saludos
+            if (t.includes('hola') || t.includes('buenas') || t.includes('saludos') || t.includes('buenos dias') || t.includes('buenas noches')) {
+                return '¡Hola! ¿En qué puedo ayudarte hoy? Cuéntame qué tipo de estructura o servicio de telecomunicaciones necesitas.';
+            }
+
+            // 8. Respuesta por defecto
+            return 'Gracias por escribirnos. Para brindarte detalles específicos sobre tu requerimiento, envíanos el formulario de cotización o indícanos la altura de la torre y la ciudad del proyecto.';
+        }
+
+        function enviarMensajeUsuario() {
             const chatInput = document.getElementById('chatInput');
             const texto = chatInput.value.trim();
 
@@ -839,99 +801,13 @@
             agregarMensaje(texto, 'user');
             chatInput.value = '';
 
-            // Agregar a historial de conversación
-            chatHistory.push({
-                role: "user",
-                parts: [{ text: texto }]
-            });
-
             mostrarTyping(true);
 
-            try {
-                // Generar contenido con Gemini Flash API
-                const payload = {
-                    contents: chatHistory,
-                    systemInstruction: {
-                        parts: [{ text: SYSTEM_INSTRUCTION }]
-                    }
-                };
-
-                const response = await fetch(GEMINI_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-                const candidate = result.candidates?.[0];
-
+            setTimeout(() => {
                 mostrarTyping(false);
-
-                if (candidate && candidate.content?.parts?.[0]?.text) {
-
-                    const botResponse = candidate.content.parts[0].text;
-
-                    agregarMensaje(botResponse, 'bot');
-
-                    // Guardar respuesta del modelo en historial
-                    chatHistory.push({
-                        role: "model",
-                        parts: [{ text: botResponse }]
-                    });
-
-                } else {
-
-                    agregarMensaje(
-                        'Gracias por tu mensaje. Un asesor de Contelt se comunicará contigo para brindarte más información.',
-                        'bot'
-                    );
-                }
-
-            } catch (error) {
-
-                console.error("Error al conectar con la API de Gemini:", error);
-
-                mostrarTyping(false);
-
-                // Respuesta de fallback en caso de problema de red
-                setTimeout(() => {
-
-                    const lower = texto.toLowerCase();
-
-                    if (
-                        lower.includes('tiempo') ||
-                        lower.includes('demora') ||
-                        lower.includes('tarda')
-                    ) {
-
-                        agregarMensaje(
-                            'Nuestros tiempos habituales para la elaboración de propuestas técnicas y cotizaciones son de 24 a 48 horas hábiles.',
-                            'bot'
-                        );
-
-                    } else if (
-                        lower.includes('precio') ||
-                        lower.includes('costo') ||
-                        lower.includes('valor')
-                    ) {
-
-                        agregarMensaje(
-                            'El valor de la estructura varía según el tipo de torre (autosoportada, arriostrada o monopolo), la zona geográfica y las cargas de viento.',
-                            'bot'
-                        );
-
-                    } else {
-
-                        agregarMensaje(
-                            'Hemos registrado tu inquietud. El equipo de ingeniería de Contelt la revisará inmediatamente.',
-                            'bot'
-                        );
-                    }
-
-                }, 800);
-            }
+                const respuesta = obtenerRespuestaLocal(texto);
+                agregarMensaje(respuesta, 'bot');
+            }, 600);
         }
 
         function handleKeyPress(event) {
