@@ -1,17 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contelt | Construcción de Torres de Telecomunicación</title>
-    <!-- Fuente moderna Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #003366;       /* Azul Marino */
-            --secondary: #0066cc;     /* Azul Rey */
-            --accent: #3399ff;        /* Azul Claro */
-            --bg-light: #f4f8fb;      /* Blanco / Gris Claro */
+            --primary: #003366;
+            --secondary: #0066cc;
+            --accent: #3399ff;
+            --bg-light: #f4f8fb;
             --text-dark: #1f2d3d;
             --text-light: #ffffff;
             --chat-bg: #ffffff;
@@ -50,21 +51,16 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 0rem;
+            text-decoration: none;
         }
 
         .logo-img {
-            height: 50px;
+            height: 70px;
             width: auto;
             object-fit: contain;
+            display: block;
         }
 
         nav a {
@@ -521,14 +517,12 @@
             display: block;
         }
 
-        /* Desaparición suave al terminar */
         #introContelt.intro-oculta {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-        /* Respeta la preferencia de movimiento reducido */
         @media (prefers-reduced-motion: reduce) {
             #introContelt {
                 transition: none;
@@ -549,15 +543,11 @@
             Tu navegador no admite videos.
         </video>
     </div>
-    <!-- FIN INTRO CONTELT -->
 
     <header>
         <div class="nav-container">
-            <a href="#" class="logo" style="display: flex; align-items: center; text-decoration: none;">
-                <img src="tu-logo.png" alt="Logo Contelt" style="height: 50px; width: auto; object-fit: contain; display: block;">
-                <strong style="display: inline-block; margin-left: 12px; font-size: 1.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;">
-                    <span style="color: var(--secondary);">Con</span><span style="color: var(--primary);">telt</span>
-                </strong>
+            <a href="#" class="logo" aria-label="Contelt - Inicio">
+                <img src="tu-logo.png" alt="Logo Contelt" class="logo-img">
             </a>
 
             <nav>
@@ -599,10 +589,12 @@
                 <h3>Fabricación y Montaje</h3>
                 <p>Diseño y construcción de torres autosoportadas, arriostradas y monopolos ajustados a los requerimientos del terreno.</p>
             </div>
+
             <div class="card">
                 <h3>Mantenimiento Estructural</h3>
                 <p>Inspección técnica, refuerzo y mantenimiento preventivo o correctivo para prolongar la vida útil de las estructuras.</p>
             </div>
+
             <div class="card">
                 <h3>Obras Civiles e Instalación</h3>
                 <p>Cimentación especializada, adecuación del sitio de trabajo e integración de infraestructura complementaria.</p>
@@ -882,22 +874,16 @@
 
                 intro.classList.add('intro-oculta');
 
-                // Elimina la pantalla después de la transición
                 setTimeout(() => {
                     intro.remove();
                 }, 1100);
             }
 
-            // Oculta la intro cuando termina el video
             video.addEventListener('ended', finalizarIntro);
-
-            // Si el archivo no carga, muestra la página
             video.addEventListener('error', finalizarIntro);
 
-            // Protección por si el video queda bloqueado
             const tiempoMaximo = setTimeout(finalizarIntro, 5000);
 
-            // Intenta iniciar la reproducción
             video.play().catch(() => {
                 finalizarIntro();
             });
@@ -910,3 +896,4 @@
 
 </body>
 </html>
+
